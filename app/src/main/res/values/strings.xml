@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Show Tracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="submit">Submit</string>
+    <string name="popular_movies">The most popular movies of</string>
+    <string name="number_2019">2019</string>
+    <string name="overview">Overview</string>
+    <string name="main_name">My TV Shows</string>
+    <string name="details_name"></string>
+    <string name="title">Title</string>
+</resources>
