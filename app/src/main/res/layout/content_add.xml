@@ -9,34 +9,15 @@
     tools:context=".ui.add.AddActivity"
     tools:showIn="@layout/activity_add">
 
-    <com.google.android.material.card.MaterialCardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:minHeight="200dp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="8dp">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-            <EditText
-                android:id="@+id/etGameTitle"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:inputType="textCapWords"
-                android:hint="@string/title"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    <EditText
+        android:id="@+id/etTitle"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="@string/default_title"
+        android:inputType="textCapWords"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

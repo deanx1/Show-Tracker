@@ -8,4 +8,5 @@
     <string name="main_name">My TV Shows</string>
     <string name="details_name"></string>
     <string name="title">Title</string>
+    <string name="default_title">The Mandalorian</string>
 </resources>

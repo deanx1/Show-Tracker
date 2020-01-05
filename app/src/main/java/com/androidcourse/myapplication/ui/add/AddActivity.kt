@@ -3,14 +3,13 @@ package com.androidcourse.myapplication.ui.add
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
-import java.lang.Exception
-import java.util.*
 
 class AddActivity : AppCompatActivity() {
 
@@ -24,8 +23,8 @@ class AddActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
 
-        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Add Game"
+//        setSupportActionBar(toolbar)
+        supportActionBar?.title = "Add TV Show"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()
@@ -34,32 +33,34 @@ class AddActivity : AppCompatActivity() {
 
     private fun initViews() {
         fab.setOnClickListener { view ->
-//            save()
+            getSearch()
         }
     }
 
-//    private fun save() {
-//        val title = etGameTitle.text.toString()
-//        val platform = etPlatform.text.toString()
-//        val day = etReleaseDay.text.toString()
-//        val month = etReleaseMonth.text.toString()
-//        val year = etReleaseYear.text.toString()
-//
-//        val date = ToDate(day, month, year)
-//
-//        if(title.isNotBlank() && platform.isNotBlank() && day.isNotBlank()
-//            && month.isNotBlank() && year.isNotBlank()) {
-//            if(date != null) {
-//                val game = Movie(title, date, platform)
-//                Log.e(TAG, "game=" + game)
-//                print(game)
-//                addViewModel.insertGame(game)
-//                finish()
-//            }
-//        } else {
-//            Toast.makeText(this, "Please fill in the input fields!", Toast.LENGTH_LONG).show()
-//        }
-//    }
+    // Make the back button in the toolbar return to the previous activity
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                finish()
+                true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun getSearch() {
+        val searchTitle = etTitle.text.toString()
+
+        if(searchTitle.isNotBlank()) {
+//            val search = Movie(searchTitle,)
+            Log.e(TAG, "search: " + searchTitle)
+            addViewModel.insertSearch(searchTitle)
+            finish()
+
+        } else {
+            Toast.makeText(this, "Please fill in the input fields!", Toast.LENGTH_LONG).show()
+        }
+    }
 
 //    private fun ToDate(day: String, month: String, year: String): Date? {
 //        //Todo implement correctly

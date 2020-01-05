@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
+import com.androidcourse.myapplication.ui.add.AddActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -34,6 +35,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
+        fab.setOnClickListener {
+            val intent = Intent(this, AddActivity::class.java)
+            startActivity(intent)
+        }
+
         submitButton.setOnClickListener {
             val year = tiMovieYearInput.text.toString()
             viewModel.getMovies(year)
