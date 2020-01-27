@@ -32,7 +32,10 @@ data class MovieDetails(
     val status: String,
     val type: String,
     val vote_average: Double,
-    val vote_count: Int
+    val vote_count: Int,
+    val genre: String?,
+    val genre2: String?,
+    val genre3: String?
 )  {
     fun getBackdrop() = "https://image.tmdb.org/t/p/w500/$backdrop_path"
 

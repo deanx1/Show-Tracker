@@ -31,5 +31,6 @@ class MovieRepository(context: Context) {
         return movieDao.getAllMovies()
     }
 
+    suspend fun deleteMovie(movie: Movie) =movieDao.deleteGame(movie)
 
 }

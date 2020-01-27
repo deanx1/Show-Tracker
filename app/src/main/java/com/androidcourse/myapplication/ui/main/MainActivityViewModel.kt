@@ -22,6 +22,7 @@ import retrofit2.Response
 class
 MainActivityViewModel(application: Application): AndroidViewModel(application) {
     private val movieRepository = MovieRepository(application.applicationContext)
+    private val ioScope = CoroutineScope(Dispatchers.IO)
 
     private val TAG = "MainViewModel"
 
@@ -66,7 +67,6 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
                         tempMoviesDetails.add(detailResult)
 
                         // TODO refresh
-
                     }
                     else error.value = "An error occurred: ${response.errorBody().toString()}"
                 }
@@ -98,13 +98,19 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
         average_rating = vote_average,
         overview = overview,
         tmdb_id = id,
-        genre1 = genres?.toString(),
-        genre2 = genres?.toString(),
-        genre3 = genres?.toString(),
+        genre1 = genres.getOrNull(0)?.name,
+        genre2 = genres.getOrNull(1)?.name,
+        genre3 = genres.getOrNull(2)?.name,
         status = status,
         last_episode_to_air = last_episode_to_air?.toString(),
         last_air_date = last_air_date,
         next_episode_to_air = next_episode_to_air?.toString()
     )
+
+    fun deleteGame(movie: Movie) {
+        ioScope.launch {
+            movieRepository.deleteMovie(movie)
+        }
+    }
 
 }

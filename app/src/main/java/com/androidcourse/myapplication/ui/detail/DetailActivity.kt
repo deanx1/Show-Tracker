@@ -39,6 +39,9 @@ class DetailActivity : AppCompatActivity() {
         tvRating.text = movie.average_rating.toString()
         tvReleaseDate.text = movie.release_date
         tvTitle.text = movie.title
+        tvGenre.text = movie.genre1
+        tvGenre2.text = movie.genre2
+        tvGenre3.text = movie.genre3
         Glide.with(this).load(movie.getBackdrop()).into(ivBackdrop)
         Glide.with(this).load(movie.getPoster()).into(ivMoviePoster)
     }

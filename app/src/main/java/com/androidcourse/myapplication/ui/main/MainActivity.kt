@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.api.MovieRepository
@@ -23,10 +26,10 @@ const val MOVIE = "MOVIE"
 
 class MainActivity : AppCompatActivity() {
 
-//    private val movieRepository = MovieRepository(application.applicationContext)
     private val colors = arrayListOf<Movie>()
     private val movieAdapter =
         MovieAdapter(colors) { movie ->
+            startDetailActivity(movie)
 //            startAddActivity(movie)
             Log.e("MAIN", "testtest: " + movie)
         }
@@ -38,10 +41,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initViews()
         initViewModel()
-
-//        GlobalScope.launch {
-//            val moviesDatabase = movieRepository.getMoviesFromDatabase()
-//        }
     }
 
     private fun initViews() {
