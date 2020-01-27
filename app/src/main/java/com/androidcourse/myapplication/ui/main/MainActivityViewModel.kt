@@ -11,10 +11,7 @@ import com.androidcourse.myapplication.model.Movie
 import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +20,9 @@ class
 MainActivityViewModel(application: Application): AndroidViewModel(application) {
     private val movieRepository = MovieRepository(application.applicationContext)
     private val ioScope = CoroutineScope(Dispatchers.IO)
-
+    val count = 0
     private val TAG = "MainViewModel"
+
 
 //    val movies = MutableLiveData<List<MovieDetails>>()
     val movies = MutableLiveData<List<Movie>>()
@@ -46,7 +44,7 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
             for (id in databaseMovies) {
                 movieIds += id.tmdb_id
 //                            id.tmdb_id
-                Log.e(TAG, "testtest: " + id.tmdb_id)
+                Log.e(TAG, "AAAAAAAAAAAA: " + id.tmdb_id)
             }
             Log.e(TAG, "movieIds: " + movieIds)
         }
@@ -77,17 +75,18 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
                 }
             })
         }
-        // Todo bij eerste klik is movies 2 leeg
-
-        // MovieDetails naar Movie
 
         for ( movie in tempMoviesDetails) {
             val temp = movie.toMovie()
             tempMovies.add(temp)
         }
-
-        movies.value = tempMovies
-        Log.e(TAG, "movies: " + movies)
+        GlobalScope.launch(Dispatchers.Main) {
+            delay(100)
+            movies.value = tempMovies
+//            getMovies()
+//            MainActivity.refresh(
+            Log.e(TAG, "movies: " + movies)
+        }
     }
 
     fun MovieDetails.toMovie() = Movie(

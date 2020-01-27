@@ -19,10 +19,10 @@ import com.androidcourse.myapplication.ui.add.AddActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 const val MOVIE = "MOVIE"
+const val TAG = "MAIN"
 
 class MainActivity : AppCompatActivity() {
 
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 //            startAddActivity(movie)
             Log.e("MAIN", "testtest: " + movie)
         }
-    private lateinit var viewModel: MainActivityViewModel
+    lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initViews()
         initViewModel()
+        getMoviesFromDatabase()
     }
 
     private fun initViews() {
@@ -50,9 +51,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-//            val year = tiMovieYearInput.text.toString()
             viewModel.getMovies()
         }
+
         rvMovies.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         rvMovies.adapter = movieAdapter
     }
@@ -72,10 +73,17 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-//    private fun startAddActivity(movie: Movie) {
-//        val intent = Intent(this, DetailActivity::class.java)
-//        intent.putExtra(MOVIE, movie)
-//        startActivity(intent)
-//    }
 
+    private fun getMoviesFromDatabase() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val databaseMovies = withContext(Dispatchers.IO) {
+                viewModel.getMovies()
+            }
+            Log.e(TAG, " called get movies: ")
+        }
+    }
+
+    fun refersh() {
+        viewModel.getMovies()
+    }
 }

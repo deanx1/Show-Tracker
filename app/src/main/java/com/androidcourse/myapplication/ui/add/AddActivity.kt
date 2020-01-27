@@ -7,6 +7,7 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.androidcourse.myapplication.R
+import com.androidcourse.myapplication.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
 
@@ -60,23 +61,6 @@ class AddActivity : AppCompatActivity() {
             Toast.makeText(this, "Please fill in the input fields!", Toast.LENGTH_LONG).show()
         }
     }
-
-//    private fun ToDate(day: String, month: String, year: String): Date? {
-//        //Todo implement correctly
-//        var date = DateTime.now()
-//        try {
-//            date = DateTime(year.toInt(), month.toInt(), day.toInt(),0, 0)
-//        } catch (e: Exception) {
-//            Toast.makeText(this, "The date is incorrect", Toast.LENGTH_LONG).show()
-//        }
-//        val fmt = DateTimeFormat.forPattern("dd, MM, yyyy")
-//        val formattedDate = fmt.print(date)
-//        Log.e(TAG, "date=" + date.toDate())
-//        Log.e(TAG, "date2=" + date)
-//        Log.e(TAG, "dateformatted=" + formattedDate)
-//        return date.toDate()
-//
-//    }
 
     private fun initViewModel() {
         addViewModel = ViewModelProviders.of(this).get(AddViewModel::class.java)

@@ -9,6 +9,7 @@ import com.androidcourse.myapplication.model.Movie
 import com.androidcourse.myapplication.model.MovieId
 import com.androidcourse.myapplication.model.SearchResult
 import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
+import com.androidcourse.myapplication.ui.main.MainActivity
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
 import kotlinx.coroutines.CoroutineScope
@@ -82,6 +83,7 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                 error.value = t.message
             }
         })
+
     }
 
     //TODO fix getDetails
@@ -113,5 +115,4 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
-
 }
