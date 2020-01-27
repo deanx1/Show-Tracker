@@ -7,10 +7,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
+import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie) -> Unit) :
+class MovieAdapter(private val movies: List<MovieDetails>, private val onClick: (MovieDetails) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private var movieNumber = 0
@@ -36,8 +37,9 @@ class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie)
             }
         }
 
-        fun bind(movie: Movie) {
-            Glide.with(context).load(movie.getPoster()).into(itemView.ivMovieImage)
+        fun bind(movie: MovieDetails) {
+//            Glide.with(context).load(movie.getPoster()).into(itemView.ivMovieImage)
+            Glide.with(context).load(movie.getBackdrop()).into(itemView.ivMovieImage)
             itemView.tvMovieNumber.text = movie.id.toString() + "."
             movieNumber = movieNumber + 1
         }

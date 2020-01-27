@@ -8,21 +8,25 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
+import com.androidcourse.myapplication.api.MovieRepository
 import com.androidcourse.myapplication.model.Movie
+import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.androidcourse.myapplication.ui.add.AddActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 const val MOVIE = "MOVIE"
 
 class MainActivity : AppCompatActivity() {
 
-
-    private val colors = arrayListOf<Movie>()
+//    private val movieRepository = MovieRepository(application.applicationContext)
+    private val colors = arrayListOf<MovieDetails>()
     private val movieAdapter =
         MovieAdapter(colors) { movie ->
-            startDetailActivity(movie)
+//            startAddActivity(movie)
         }
     private lateinit var viewModel: MainActivityViewModel
 
@@ -32,6 +36,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initViews()
         initViewModel()
+
+//        GlobalScope.launch {
+//            val moviesDatabase = movieRepository.getMoviesFromDatabase()
+//        }
     }
 
     private fun initViews() {
@@ -41,10 +49,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         submitButton.setOnClickListener {
-            val year = tiMovieYearInput.text.toString()
-            viewModel.getMovies(year)
+//            val year = tiMovieYearInput.text.toString()
+            viewModel.getMovies()
         }
-        rvMovies.layoutManager = StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL)
+        rvMovies.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         rvMovies.adapter = movieAdapter
     }
 
@@ -62,5 +70,11 @@ class MainActivity : AppCompatActivity() {
         intent.putExtra(MOVIE, movie)
         startActivity(intent)
     }
+
+//    private fun startAddActivity(movie: Movie) {
+//        val intent = Intent(this, DetailActivity::class.java)
+//        intent.putExtra(MOVIE, movie)
+//        startActivity(intent)
+//    }
 
 }

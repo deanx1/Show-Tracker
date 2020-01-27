@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.androidcourse.myapplication.R
-import com.androidcourse.myapplication.model.Movie
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
 
@@ -54,7 +53,7 @@ class AddActivity : AppCompatActivity() {
         if(searchTitle.isNotBlank()) {
 //            val search = Movie(searchTitle,)
             Log.e(TAG, "search: " + searchTitle)
-            addViewModel.insertSearch(searchTitle)
+            addViewModel.getSearch(searchTitle)
             finish()
 
         } else {
