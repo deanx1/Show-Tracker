@@ -10,7 +10,7 @@ import com.androidcourse.myapplication.model.Movie
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie) -> Unit) :
+class MovieAdapter(private val movieList: List<Movie>, private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -23,15 +23,15 @@ class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie)
         )
     }
 
-    override fun getItemCount(): Int = movies.size
+    override fun getItemCount(): Int = movieList.size
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movies[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) = holder.bind(movieList[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         init {
             itemView.setOnClickListener {
-                onClick(movies[adapterPosition])
+                onClick(movieList[adapterPosition])
             }
         }
 

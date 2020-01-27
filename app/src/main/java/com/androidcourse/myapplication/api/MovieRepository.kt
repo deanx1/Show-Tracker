@@ -27,7 +27,10 @@ class MovieRepository(context: Context) {
         movieDao.insertMovie(movie)
     }
 
-    suspend fun getMoviesFromDatabase(): List<Movie> {
+//    suspend fun getMoviesFromDatabase(): List<Movie> {
+//        return movieDao.getAllMovies()
+//    }
+    fun getMoviesFromDatabase(): LiveData<List<Movie>> {
         return movieDao.getAllMovies()
     }
 

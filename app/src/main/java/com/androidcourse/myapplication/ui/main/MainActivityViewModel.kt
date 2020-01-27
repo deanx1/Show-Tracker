@@ -1,7 +1,6 @@
 package com.androidcourse.myapplication.ui.main
 
 import android.app.Application
-import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -23,31 +22,39 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
     val count = 0
     private val TAG = "MainViewModel"
 
+    private val mainActivity = MainActivity()
+
 
 //    val movies = MutableLiveData<List<MovieDetails>>()
-    val movies = MutableLiveData<List<Movie>>()
+//    val movies = MutableLiveData<List<Movie>>()
+    val movies: LiveData<List<Movie>> = movieRepository.getMoviesFromDatabase()
 
     var tempMoviesDetails: MutableList<MovieDetails> = mutableListOf()
     var tempMovies: MutableList<Movie> = mutableListOf()
 
     val error = MutableLiveData<String>()
 
-//    var movieIds : IntArray = intArrayOf(82856, 44217, 1399)
-    private var movieIds : IntArray = intArrayOf()
+    var movieIds : IntArray = intArrayOf(82856, 44217, 1399)
+//    private var movieIds : IntArray = intArrayOf()
+
+    private fun getMoviesFromDatabase() {
+        CoroutineScope(Dispatchers.Main).launch {
+            val databaseMovies = withContext(Dispatchers.IO) {
+//                movieRepository.getMoviesFromDatabase()
+            }
+//            for (id in databaseMovies) {
+//                movieIds += id.tmdb_id
+////                            id.tmdb_id
+//                Log.e(TAG, "AAAAAAAAAAAA: " + id.tmdb_id)
+//            }
+            Log.e(TAG, "movieIds: " + movieIds)
+        }
+    }
 
     fun getMovies() {
         //Get movies from database
-        CoroutineScope(Dispatchers.Main).launch {
-            val databaseMovies = withContext(Dispatchers.IO) {
-                movieRepository.getMoviesFromDatabase()
-            }
-            for (id in databaseMovies) {
-                movieIds += id.tmdb_id
-//                            id.tmdb_id
-                Log.e(TAG, "AAAAAAAAAAAA: " + id.tmdb_id)
-            }
-            Log.e(TAG, "movieIds: " + movieIds)
-        }
+//        getMoviesFromDatabase()
+
         for (id in movieIds) {
             movieRepository.getMovieDetails(id).enqueue(object : Callback<JsonObject> {
 
@@ -80,13 +87,13 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
             val temp = movie.toMovie()
             tempMovies.add(temp)
         }
-        GlobalScope.launch(Dispatchers.Main) {
-            delay(100)
-            movies.value = tempMovies
-//            getMovies()
-//            MainActivity.refresh(
-            Log.e(TAG, "movies: " + movies)
-        }
+
+//            movies.value = tempMovies
+//            movies. = tempMovies
+//            mainActivity.movies.addAll(tempMovies)
+//            mainActivity.movieAdapter.notifyDataSetChanged()
+
+
     }
 
     fun MovieDetails.toMovie() = Movie(

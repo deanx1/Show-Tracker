@@ -10,8 +10,10 @@ interface MovieDao {
     @Insert
     suspend fun insertMovie(movie: Movie)
 
+//    @Query("SELECT * FROM movie_table")
+//    suspend fun getAllMovies(): List<Movie>
     @Query("SELECT * FROM movie_table")
-    suspend fun getAllMovies(): List<Movie>
+    fun getAllMovies(): LiveData<List<Movie>>
 
     @Update
     suspend fun updateGame(movie: Movie)

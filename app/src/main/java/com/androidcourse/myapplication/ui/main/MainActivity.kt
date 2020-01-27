@@ -6,15 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
-import com.androidcourse.myapplication.api.MovieRepository
 import com.androidcourse.myapplication.model.Movie
-import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.androidcourse.myapplication.ui.add.AddActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,13 +21,13 @@ const val TAG = "MAIN"
 
 class MainActivity : AppCompatActivity() {
 
-    private val colors = arrayListOf<Movie>()
-    private val movieAdapter =
-        MovieAdapter(colors) { movie ->
+    val movies = arrayListOf<Movie>()
+    val movieAdapter =
+        MovieAdapter(movies) { movie ->
             startDetailActivity(movie)
-//            startAddActivity(movie)
             Log.e("MAIN", "testtest: " + movie)
         }
+
     lateinit var viewModel: MainActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initViews()
         initViewModel()
-        getMoviesFromDatabase()
+//        getMoviesFromDatabase()
     }
 
     private fun initViews() {
@@ -60,9 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(this).get(MainActivityViewModel::class.java)
+
         viewModel.movies.observe(this, Observer {
-            colors.clear()
-            colors.addAll(it)
+            this@MainActivity.movies.clear()
+
+            // sort list by title
+            val sortedList = movies.sortedWith(compareBy({it.title}))
+//            this@MainActivity.movies.addAll(sortedList)
+            this@MainActivity.movies.addAll(it)
             movieAdapter.notifyDataSetChanged()
         })
     }

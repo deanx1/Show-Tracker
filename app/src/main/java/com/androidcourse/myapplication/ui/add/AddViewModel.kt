@@ -12,6 +12,8 @@ import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.androidcourse.myapplication.ui.main.MainActivity
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.content_main.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,6 +25,8 @@ import retrofit2.Response
 class AddViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "AddViwModel"
+
+    private val mainActivity = MainActivity()
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val movieRepository = MovieRepository(application.applicationContext)
@@ -75,6 +79,9 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                         "title", "release_date", 6.6, "overview", idInt, "action", "action", "Fiction", "Status", "last episode to air date",
                         "last air date", "next episode to air"))
 
+                    getDetails(idInt)
+                    mainActivity.movieAdapter.notifyDataSetChanged()
+
                 }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
@@ -99,12 +106,12 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                     // Return a list of the SearchResults
 //                    val searchResult = GsonBuilder().create().fromJson(results,Array<SearchResult>::class.java).toList()
                     val detailResult = GsonBuilder().create().fromJson(results,MovieDetails::class.java)
-                    val tempMovies: MutableList<MovieDetails> = mutableListOf()
-                    tempMovies.add(detailResult)
+//                    val tempMovies: MutableList<MovieDetails> = mutableListOf()
+//                    tempMovies.add(detailResult)
 
 //                    detailJson.value = response.body()
 
-                    // TODO nog niks met dit
+//                    mainActivity.rvMovies.post(detailResult)
                 }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
