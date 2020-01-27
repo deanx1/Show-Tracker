@@ -25,26 +25,19 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
 
     private val TAG = "MainViewModel"
 
-    val movies = MutableLiveData<List<MovieDetails>>()
+//    val movies = MutableLiveData<List<MovieDetails>>()
+    val movies = MutableLiveData<List<Movie>>()
 
-    var tempMovies: MutableList<MovieDetails> = mutableListOf()
+    var tempMoviesDetails: MutableList<MovieDetails> = mutableListOf()
+    var tempMovies: MutableList<Movie> = mutableListOf()
 
     val error = MutableLiveData<String>()
 
 //    var movieIds : IntArray = intArrayOf(82856, 44217, 1399)
-    var movieIds : IntArray = intArrayOf()
-
-    private fun getMoviesFromDatabase() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val databaseMovies = withContext(Dispatchers.IO) {
-                movieRepository.getMoviesFromDatabase()
-            }
-        }
-    }
+    private var movieIds : IntArray = intArrayOf()
 
     fun getMovies() {
-
-        //todo check of de ids hier wel gevuld zijn.
+        //Get movies from database
         CoroutineScope(Dispatchers.Main).launch {
             val databaseMovies = withContext(Dispatchers.IO) {
                 movieRepository.getMoviesFromDatabase()
@@ -70,7 +63,7 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
                         val detailResult = GsonBuilder().create().fromJson(results, MovieDetails::class.java)
 
 //                    detailJson.value = response.body()
-                        tempMovies.add(detailResult)
+                        tempMoviesDetails.add(detailResult)
 
                         // TODO refresh
 
@@ -86,39 +79,32 @@ MainActivityViewModel(application: Application): AndroidViewModel(application) {
         }
         // Todo bij eerste klik is movies 2 leeg
 
+        // MovieDetails naar Movie
+
+        for ( movie in tempMoviesDetails) {
+            val temp = movie.toMovie()
+            tempMovies.add(temp)
+        }
+
         movies.value = tempMovies
         Log.e(TAG, "movies: " + movies)
-
-
     }
 
-//    fun getMovies(year: String) {
-//    fun getMovies(year: String) {
-////        movieRepository.getMovies(year).enqueue(object: Callback<JsonObject> {
-//        movieRepository.getMovies(year).enqueue(object: Callback<JsonObject> {
-//
-//            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-//                // get the results from the body
-//                val results = response.body()?.get("results")
-//                // pass the result to an array of Movie objects
-//                val tempMovies = GsonBuilder().create().fromJson(results,Array<Movie>::class.java).toList()
-//
-//                // set the id
-////                for ((num, movie) in tempMovies.withIndex()) {
-////                    tempMovies[num].id = num+1
-////                }
-//                // check if the response is succesful, else show the error
-//                if (response.isSuccessful) this@MainActivityViewModel.movies.value = tempMovies
-//                else error.value = "An error occured: ${response.errorBody().toString()}"
-//            }
-//
-//            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-//                error.value = t.message
-//            }
-//        })
-//    }
-
-
-
+    fun MovieDetails.toMovie() = Movie(
+        backdrop_image_path = backdrop_path,
+        poster_image_path = poster_path,
+        title = name,
+        release_date = first_air_date,
+        average_rating = vote_average,
+        overview = overview,
+        tmdb_id = id,
+        genre1 = genres?.toString(),
+        genre2 = genres?.toString(),
+        genre3 = genres?.toString(),
+        status = status,
+        last_episode_to_air = last_episode_to_air?.toString(),
+        last_air_date = last_air_date,
+        next_episode_to_air = next_episode_to_air?.toString()
+    )
 
 }

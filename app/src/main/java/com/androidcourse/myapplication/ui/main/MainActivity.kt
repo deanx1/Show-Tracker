@@ -2,6 +2,7 @@ package com.androidcourse.myapplication.ui.main
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -23,10 +24,11 @@ const val MOVIE = "MOVIE"
 class MainActivity : AppCompatActivity() {
 
 //    private val movieRepository = MovieRepository(application.applicationContext)
-    private val colors = arrayListOf<MovieDetails>()
+    private val colors = arrayListOf<Movie>()
     private val movieAdapter =
         MovieAdapter(colors) { movie ->
 //            startAddActivity(movie)
+            Log.e("MAIN", "testtest: " + movie)
         }
     private lateinit var viewModel: MainActivityViewModel
 

@@ -16,8 +16,13 @@ data class Movie(
     @SerializedName("vote_average") var average_rating: Double,
     @SerializedName("overview") var overview: String,
     @SerializedName("tmdb_id") var tmdb_id: Int,
-    @SerializedName("genre1") var genre1: String,
-    @SerializedName("genre2") var genre2: String,
+    @SerializedName("genre1") var genre1: String?,
+    @SerializedName("genre2") var genre2: String?,
+    @SerializedName("genre3") var genre3: String?,
+    @SerializedName("status") var status: String?,
+    @SerializedName("last_episode_to_air") var last_episode_to_air: String?,
+    @SerializedName("last_air_date") var last_air_date: String?,
+    @SerializedName("next_episode_to_air") var next_episode_to_air: String?,
     @PrimaryKey var id: Long? = null
 //    var id: Int
 ): Parcelable {

@@ -11,7 +11,7 @@ import com.androidcourse.myapplication.model.jsonToKotlin.details.MovieDetails
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.item_movie.view.*
 
-class MovieAdapter(private val movies: List<MovieDetails>, private val onClick: (MovieDetails) -> Unit) :
+class MovieAdapter(private val movies: List<Movie>, private val onClick: (Movie) -> Unit) :
     RecyclerView.Adapter<MovieAdapter.ViewHolder>() {
 
     private var movieNumber = 0
@@ -37,12 +37,12 @@ class MovieAdapter(private val movies: List<MovieDetails>, private val onClick: 
             }
         }
 
-        fun bind(movie: MovieDetails) {
+        fun bind(movie: Movie) {
 //            Glide.with(context).load(movie.getPoster()).into(itemView.ivMovieImage)
             Glide.with(context).load(movie.getBackdrop()).into(itemView.ivMovieImage)
-            itemView.tvMovieNumber.text = movie.name
+            itemView.tvMovieNumber.text = movie.title
 //            itemView.tvMovieNumber.text = movie.id.toString()
-            movieNumber = movieNumber + 1
+//            movieNumber = movieNumber + 1
         }
     }
 

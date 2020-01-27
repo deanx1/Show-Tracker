@@ -71,7 +71,8 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                     // todo add to the list
                     insertMovie(Movie(
                         "imagepad", "poster_path",
-                        "title", "release_date", 6.6, "overview", idInt, "action", "action"))
+                        "title", "release_date", 6.6, "overview", idInt, "action", "action", "Fiction", "Status", "last episode to air date",
+                        "last air date", "next episode to air"))
 
                 }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"

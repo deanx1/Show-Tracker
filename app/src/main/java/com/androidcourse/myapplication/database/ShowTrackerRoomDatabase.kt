@@ -39,7 +39,9 @@ abstract class ShowTrackerRoomDatabase : RoomDatabase() {
                                         CoroutineScope(Dispatchers.IO).launch {
                                             database.movieDao().insertMovie(Movie(
                                                 "imagepad", "poster_path",
-                                                "title", "release_date", 6.6, "overview", -0, "Action", "Drama"))
+                                                "title", "release_date", 6.6, "overview", -0, "Action",
+                                                "Drama", "Fiction", "Status", "last episode to air date",
+                                                "last air date", "next episode to air"))
                                         }
                                     }
                                 }
