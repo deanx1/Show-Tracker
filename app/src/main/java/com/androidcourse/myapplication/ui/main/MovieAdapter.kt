@@ -40,7 +40,8 @@ class MovieAdapter(private val movies: List<MovieDetails>, private val onClick: 
         fun bind(movie: MovieDetails) {
 //            Glide.with(context).load(movie.getPoster()).into(itemView.ivMovieImage)
             Glide.with(context).load(movie.getBackdrop()).into(itemView.ivMovieImage)
-            itemView.tvMovieNumber.text = movie.id.toString() + "."
+            itemView.tvMovieNumber.text = movie.name
+//            itemView.tvMovieNumber.text = movie.id.toString()
             movieNumber = movieNumber + 1
         }
     }
