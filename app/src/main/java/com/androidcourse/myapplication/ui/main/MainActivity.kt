@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         initViews()
         initViewModel()
-//        getMoviesFromDatabase()
     }
 
     private fun initViews() {
@@ -45,9 +44,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        submitButton.setOnClickListener {
-            viewModel.getMovies()
-        }
 
         rvMovies.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         rvMovies.adapter = movieAdapter
@@ -61,7 +57,6 @@ class MainActivity : AppCompatActivity() {
 
             // sort list by title
             val sortedList = movies.sortedWith(compareBy({it.title}))
-//            this@MainActivity.movies.addAll(sortedList)
             this@MainActivity.movies.addAll(it)
             movieAdapter.notifyDataSetChanged()
         })
@@ -73,17 +68,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-
-    private fun getMoviesFromDatabase() {
-        CoroutineScope(Dispatchers.Main).launch {
-            val databaseMovies = withContext(Dispatchers.IO) {
-                viewModel.getMovies()
-            }
-            Log.e(TAG, " called get movies: ")
-        }
-    }
-
-    fun refersh() {
-        viewModel.getMovies()
-    }
 }

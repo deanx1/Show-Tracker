@@ -8,16 +8,6 @@ import retrofit2.http.Path
 
 interface MovieApiService {
 
-//    // Get method for the get request
-//    @GET("/3/discover/movie?" +
-//            "api_key=cd5a887a914e81181124a538a2908d2e" +
-//            "&language=en-US" +
-//            "&sort_by=popularity.desc" +
-//            "&include_adult=true" +
-//            "&include_video=false" +
-//            "&page=1")
-//    fun getMovies(@Query("year") year: String): Call<JsonObject>
-
     // Get method for the get request
     @GET("/3/discover/movie?" +
             "api_key=cd5a887a914e81181124a538a2908d2e" +
@@ -42,16 +32,5 @@ interface MovieApiService {
             "api_key=cd5a887a914e81181124a538a2908d2e" +
             "&language=en-US")
     fun getMovieDetails(@Path("tv_id") id: Int): Call<JsonObject>
-
-//    // Get method for the get request
-//    @GET("/3/discover/movie?" +
-//            "api_key=cd5a887a914e81181124a538a2908d2e" +
-//            "&language=en-US" +
-//            "&sort_by=popularity.desc" +
-//            "&include_adult=true" +
-//            "&include_video=false" +
-//            "&page=1")
-//    fun getMovies(@Query("year") year: String): Call<JsonObject>
-
 
 }

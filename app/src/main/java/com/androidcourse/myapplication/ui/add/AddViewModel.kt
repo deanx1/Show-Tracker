@@ -26,30 +26,19 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
 
     private val TAG = "AddViwModel"
 
-    private val mainActivity = MainActivity()
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
     private val movieRepository = MovieRepository(application.applicationContext)
 
     val searchJson = MutableLiveData<JsonObject>()
-//    val detailJson = MutableLiveData<JsonObject>()
     val error = MutableLiveData<String>()
 
 
     fun insertMovie(movie: Movie) {
         ioScope.launch {
             movieRepository.insertMovie(movie)
-//            this.reminders.clear()
         }
     }
-
-
-//    fun getSearch(searchTitle: String) {
-//        ioScope.launch {
-//            movieRepository.getSearch(searchTitle)
-//            Log.e("AddViewModel", "Searching")
-//        }
-//    }
 
     fun getSearch(searchTitle: String) {
         movieRepository.getSearch(searchTitle).enqueue(object : Callback<JsonObject> {
@@ -57,10 +46,8 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                 if (response.isSuccessful) {
                     // get the results from the body
                     val results = response.body()?.get("results")
-//                    Log.e(TAG, "search: " + results)
 
                     // Return a list of the SearchResults
-//                    val searchResult = GsonBuilder().create().fromJson(results,Array<SearchResult>::class.java).toList()
                     val searchResult = GsonBuilder().create().fromJson(results,Array<SearchResult>::class.java).toList()
                     val searchStr = searchResult.toString()
 
@@ -68,19 +55,12 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                     val pattern1 = Regex("[0-9]+")
                     val matchResult = pattern1.find(searchStr)
                     val id = matchResult?.value
-                    val idInt = id!!.toInt()
 
-//                    getDetails(idInt)
-                    searchJson.value = response.body()
-//                    insertMovie(MovieId(idInt))
-                    // todo add to the list
-                    insertMovie(Movie(
-                        "imagepad", "poster_path",
-                        "title", "release_date", 6.6, "overview", idInt, "action", "action", "Fiction", "Status", "last episode to air date",
-                        "last air date", "next episode to air"))
-
-                    getDetails(idInt)
-                    mainActivity.movieAdapter.notifyDataSetChanged()
+                    if (id != null) {
+                        val idInt = id!!.toInt()
+                        searchJson.value = response.body()
+                        getDetails(idInt)
+                    }
 
                 }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
@@ -95,6 +75,7 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
 
     //TODO fix getDetails
     fun getDetails(id: Int) {
+        var movie: Movie
         Log.e(TAG, "getDetails: Starting ")
         movieRepository.getMovieDetails(id).enqueue(object : Callback<JsonObject> {
             override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
@@ -103,15 +84,9 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
                     val results = response.body()
                     Log.e(TAG, "getDetails: " + results)
 
-                    // Return a list of the SearchResults
-//                    val searchResult = GsonBuilder().create().fromJson(results,Array<SearchResult>::class.java).toList()
                     val detailResult = GsonBuilder().create().fromJson(results,MovieDetails::class.java)
-//                    val tempMovies: MutableList<MovieDetails> = mutableListOf()
-//                    tempMovies.add(detailResult)
 
-//                    detailJson.value = response.body()
-
-//                    mainActivity.rvMovies.post(detailResult)
+                    insertMovie(detailResult.toMovie())
                 }
                 else error.value = "An error occurred: ${response.errorBody().toString()}"
             }
@@ -122,4 +97,21 @@ class AddViewModel(application: Application) : AndroidViewModel(application) {
             }
         })
     }
+
+    fun MovieDetails.toMovie() = Movie(
+        backdrop_image_path = backdrop_path,
+        poster_image_path = poster_path,
+        title = name,
+        release_date = first_air_date,
+        average_rating = vote_average,
+        overview = overview,
+        tmdb_id = id,
+        genre1 = genres.getOrNull(0)?.name,
+        genre2 = genres.getOrNull(1)?.name,
+        genre3 = genres.getOrNull(2)?.name,
+        status = status,
+        last_episode_to_air = last_episode_to_air?.toString(),
+        last_air_date = last_air_date,
+        next_episode_to_air = next_episode_to_air?.toString()
+    )
 }

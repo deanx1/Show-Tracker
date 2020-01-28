@@ -27,13 +27,10 @@ class MovieRepository(context: Context) {
         movieDao.insertMovie(movie)
     }
 
-//    suspend fun getMoviesFromDatabase(): List<Movie> {
-//        return movieDao.getAllMovies()
-//    }
     fun getMoviesFromDatabase(): LiveData<List<Movie>> {
         return movieDao.getAllMovies()
     }
 
-    suspend fun deleteMovie(movie: Movie) =movieDao.deleteGame(movie)
+    suspend fun deleteMovie(movie: Movie) = movieDao.deleteGame(movie)
 
 }

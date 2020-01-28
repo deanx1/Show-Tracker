@@ -151,4 +151,15 @@
         android:src="@drawable/ic_star_24dp"
         app:layout_constraintStart_toStartOf="@+id/tvReleaseText"
         app:layout_constraintTop_toBottomOf="@+id/tvReleaseText" />
+
+    <Button
+        android:id="@+id/btnRemove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/remove"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tvGenre3"
+        app:layout_constraintTop_toTopOf="@+id/tvGenre3"
+        android:background="@drawable/btn_round"
+        tools:text="@string/remove" />
 </androidx.constraintlayout.widget.ConstraintLayout>

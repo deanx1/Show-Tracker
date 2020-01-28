@@ -2,23 +2,24 @@ package com.androidcourse.myapplication.ui.detail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.view.MenuItem
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
 import com.androidcourse.myapplication.ui.main.MOVIE
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_detail.*
-import androidx.core.app.ComponentActivity
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
+import androidx.lifecycle.ViewModelProviders
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class DetailActivity : AppCompatActivity() {
+
+//    private val movieRepository = MovieRepository(application.applicationContext)
+
+    private lateinit var detailViewModel: DetailActivityViewModel
+    private val ioScope = CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +28,13 @@ class DetailActivity : AppCompatActivity() {
         // Show an empty title
         supportActionBar?.title = ""
         initViews()
+        initViewModel()
     }
 
     private fun initViews() {
+
         val movie: Movie = intent.extras?.getParcelable(MOVIE)!!
 
-        // No longer needed as textView is inside ScrollView
-//        tvOverviewContent.setMovementMethod(ScrollingMovementMethod())
-//        tvOverviewContent.movementMethod = ScrollingMovementMethod()
         tvOverviewContent.text = movie.overview
         tvRating.text = movie.average_rating.toString()
         tvReleaseDate.text = movie.release_date
@@ -44,6 +44,13 @@ class DetailActivity : AppCompatActivity() {
         tvGenre3.text = movie.genre3
         Glide.with(this).load(movie.getBackdrop()).into(ivBackdrop)
         Glide.with(this).load(movie.getPoster()).into(ivMoviePoster)
+
+        btnRemove.setOnClickListener {
+            ioScope.launch {
+                detailViewModel.deleteMovie(movie)
+                finish()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -54,5 +61,9 @@ class DetailActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun initViewModel() {
+        detailViewModel = ViewModelProviders.of(this).get(DetailActivityViewModel::class.java)
     }
 }

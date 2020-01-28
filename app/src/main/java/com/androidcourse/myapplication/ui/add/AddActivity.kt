@@ -18,8 +18,7 @@ class AddActivity : AppCompatActivity() {
     private lateinit var addViewModel: AddViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        // Lets us use JodaTime
-//        JodaTimeAndroid.init(this);
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add)
 
