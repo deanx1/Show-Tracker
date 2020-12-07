@@ -23,7 +23,7 @@ class AddActivity : AppCompatActivity() {
         setContentView(R.layout.activity_add)
 
 //        setSupportActionBar(toolbar)
-        supportActionBar?.title = "Add TV Show"
+        supportActionBar?.title = getString(R.string.add_name)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         initViews()

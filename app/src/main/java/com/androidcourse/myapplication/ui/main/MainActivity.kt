@@ -3,6 +3,7 @@ package com.androidcourse.myapplication.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -44,7 +45,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
         rvMovies.layoutManager = StaggeredGridLayoutManager(1, LinearLayoutManager.VERTICAL)
         rvMovies.adapter = movieAdapter
     }
@@ -66,6 +66,12 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(this, DetailActivity::class.java)
         intent.putExtra(MOVIE, movie)
         startActivity(intent)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
     }
 
 }
