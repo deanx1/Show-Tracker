@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProviders
 import com.androidcourse.myapplication.R
-import com.androidcourse.myapplication.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
 

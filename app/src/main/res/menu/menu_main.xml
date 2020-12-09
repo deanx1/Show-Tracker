@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.androidcourse.shoppinglistkotlin.ui.MainActivity">
     <item
-        android:id="@+id/action_delete_shows_list"
+        android:id="@+id/action_open_settings"
         android:icon="@drawable/ic_settings"
         android:title=""
         app:showAsAction="ifRoom" />

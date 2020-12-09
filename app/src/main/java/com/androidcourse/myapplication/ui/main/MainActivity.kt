@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
 import com.androidcourse.myapplication.ui.add.AddActivity
+import com.androidcourse.myapplication.ui.add.SettingsActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -55,9 +57,10 @@ class MainActivity : AppCompatActivity() {
         viewModel.movies.observe(this, Observer {
             this@MainActivity.movies.clear()
 
-            // sort list by title
-            val sortedList = movies.sortedWith(compareBy({it.title}))
+
             this@MainActivity.movies.addAll(it)
+            // sort list by title
+            movies.sortedWith(compareBy({it.title}))
             movieAdapter.notifyDataSetChanged()
         })
     }
@@ -74,4 +77,22 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    private fun startSettingsActivity() {
+        Log.e("MAIN", "testtest: startSettingsActivity")
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_open_settings -> {
+                startSettingsActivity()
+                true
+            }
+            else -> super.onOptionsItemSelected(item) // TODO check this
+        }
+    }
 }

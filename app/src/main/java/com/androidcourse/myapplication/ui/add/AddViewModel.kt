@@ -24,7 +24,7 @@ import retrofit2.Response
 
 class AddViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val TAG = "AddViwModel"
+    private val TAG = "AddViewModel"
 
 
     private val ioScope = CoroutineScope(Dispatchers.IO)
