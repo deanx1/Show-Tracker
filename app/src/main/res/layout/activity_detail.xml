@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.Detail">
+    tools:context=".ui.detail.DetailActivity">
 
     <ImageView
         android:id="@+id/ivBackdrop"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_launcher"
+        android:contentDescription="@string/backdrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -22,6 +24,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:src="@mipmap/ic_launcher_round"
+        android:contentDescription="@string/poster"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ivBackdrop" />
 
@@ -31,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="TextView"
+        android:text="@string/now_empty"
         android:textColor="@android:color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -43,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="@string/Release"
+        android:text="@string/release"
         app:layout_constraintStart_toStartOf="@+id/tvTitle"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
@@ -53,7 +56,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
-        android:text="@string/Release"
+        android:text="@string/release"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="@+id/tvRating"
@@ -65,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/Release"
+        android:text="@string/release"
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvGenre"
@@ -78,7 +81,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/Release"
+        android:text="@string/release"
         android:textStyle="bold"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@+id/tvGenre"
@@ -91,7 +94,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="TextView"
+        android:text="@string/now_empty"
         app:layout_constraintBottom_toBottomOf="@+id/tvReleaseText"
         app:layout_constraintStart_toEndOf="@+id/tvReleaseText"
         app:layout_constraintTop_toTopOf="@+id/tvReleaseText"
@@ -126,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="TextView"
+            android:text="@string/now_empty"
             app:layout_constraintStart_toStartOf="@+id/tvOverviewHeader"
             app:layout_constraintTop_toBottomOf="@+id/tvOverviewHeader" />
     </ScrollView>
@@ -136,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="TextView"
+        android:text="@string/now_empty"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/ivStar"
@@ -149,6 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_star_24dp"
+        android:contentDescription="@string/green_star"
         app:layout_constraintStart_toStartOf="@+id/tvReleaseText"
         app:layout_constraintTop_toBottomOf="@+id/tvReleaseText" />
 

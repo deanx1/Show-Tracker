@@ -14,14 +14,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
-        >
+        tools:targetApi="m">
         <activity
             android:name=".ui.add.AddActivity">
 
         </activity>
         <activity
-            android:name=".ui.detail.DetailActivity"
-            android:label="@string/main_name"></activity>
+            android:name=".ui.detail.DetailActivity">
+        </activity>
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:label="@string/settings_name">
+        </activity>
         <activity
             android:name=".ui.main.MainActivity"
             android:label="@string/main_name"

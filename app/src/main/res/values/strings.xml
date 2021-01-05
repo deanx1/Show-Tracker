@@ -8,9 +8,17 @@
     <string name="main_name">My TV Shows</string>
     <string name="add_name">Add TV Show</string>
     <string name="settings_name">Settings</string>
-    <string name="details_name"></string>
     <string name="title">Title</string>
     <string name="default_title">Title</string>
-    <string name="Release">Release</string>
+    <string name="release">Release</string>
     <string name="remove">Remove</string>
+    <string name="l_episode">Every Episode</string>
+    <string name="l_season">Whole Seasons</string>
+    <string name="l_EpisodeOrSeason">Episode or whole season</string>
+    <string name="now_empty">now_empty</string>
+    <string name="backdrop">Backdrop image</string>
+    <string name="poster">Poster Image</string>
+    <string name="green_star">Green star icon</string>
+
+
 </resources>

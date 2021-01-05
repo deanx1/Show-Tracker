@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.androidcourse.myapplication.R
 import com.androidcourse.myapplication.model.Movie
 import com.androidcourse.myapplication.ui.add.AddActivity
-import com.androidcourse.myapplication.ui.add.SettingsActivity
+import com.androidcourse.myapplication.ui.settings.SettingsActivity
 import com.androidcourse.myapplication.ui.detail.DetailActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -78,7 +78,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun startSettingsActivity() {
-        Log.e("MAIN", "testtest: startSettingsActivity")
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
     }

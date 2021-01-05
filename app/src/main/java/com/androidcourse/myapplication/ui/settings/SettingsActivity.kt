@@ -1,10 +1,11 @@
-package com.androidcourse.myapplication.ui.add
+package com.androidcourse.myapplication.ui.settings
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import com.androidcourse.myapplication.R
+import com.androidcourse.myapplication.ui.add.SettingsViewModel
 
 class SettingsActivity : AppCompatActivity() {
 
